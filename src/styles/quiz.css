@@ -1,0 +1,311 @@
+    @font-face {
+      font-family: 'YPairingFont';
+      src: url('fonts/YPairingFont-Regular.ttf') format('truetype');
+      font-weight: normal;
+    }
+
+    @font-face {
+      font-family: 'YPairingFont';
+      src: url('fonts/YPairingFont-Bold.ttf') format('truetype');
+      font-weight: bold;
+    }
+
+    /* ── 회전 방사형 배경 ── */
+    @keyframes spinRays {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to   { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    body {
+      background: transparent; /* spinRays가 보이도록 */
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 50%; left: 50%;
+      width: 300vmax; height: 300vmax;
+      background: conic-gradient(
+        #87CEEB 0deg,   #87CEEB 18deg,
+        white    18deg, white    36deg,
+        #87CEEB 36deg,  #87CEEB 54deg,
+        white    54deg, white    72deg,
+        #87CEEB 72deg,  #87CEEB 90deg,
+        white    90deg, white    108deg,
+        #87CEEB 108deg, #87CEEB 126deg,
+        white    126deg,white    144deg,
+        #87CEEB 144deg, #87CEEB 162deg,
+        white    162deg,white    180deg,
+        #87CEEB 180deg, #87CEEB 198deg,
+        white    198deg,white    216deg,
+        #87CEEB 216deg, #87CEEB 234deg,
+        white    234deg,white    252deg,
+        #87CEEB 252deg, #87CEEB 270deg,
+        white    270deg,white    288deg,
+        #87CEEB 288deg, #87CEEB 306deg,
+        white    306deg,white    324deg,
+        #87CEEB 324deg, #87CEEB 342deg,
+        white    342deg,white    360deg
+      );
+      transform: translate(-50%, -50%);
+      animation: spinRays 30s linear infinite;
+      z-index: -1;
+    }
+
+    /* ── 컨테이너 여백 ── */
+    .container {
+      padding-bottom: 24px;
+    }
+
+    /* ── 헤더 ── */
+    .quiz-header {
+      padding: 14px 0 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.88rem;
+      color: var(--color-text-light);
+    }
+
+    /* ── 진행 도트 ── */
+    .progress-dots {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .progress-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.45);
+      border: 1.5px solid rgba(135, 206, 235, 0.5);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .progress-dot.done {
+      background: #87CEEB;
+      border-color: #5aaed4;
+    }
+
+    .progress-dot.current {
+      background: var(--color-primary);
+      border-color: var(--color-primary-dark);
+      transform: scale(1.45);
+    }
+
+    /* ── 폴라로이드 프레임 ── */
+    .polaroid-outer {
+      margin-bottom: 14px;
+    }
+
+    .polaroid {
+      background: #fff;
+      padding: 10px 10px 52px;
+      border-radius: 3px;
+      box-shadow:
+        0 1px 4px rgba(0, 0, 0, 0.07),
+        0 8px 28px rgba(0, 0, 0, 0.13),
+        0 22px 52px rgba(0, 0, 0, 0.07);
+      transform: rotate(-0.8deg);
+      position: relative;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* 문제 바뀔 때 살짝 튕기는 효과 */
+    @keyframes polaroidPop {
+      0%   { transform: rotate(-0.8deg) scale(1); }
+      40%  { transform: rotate(0.6deg) scale(0.97); }
+      100% { transform: rotate(-0.8deg) scale(1); }
+    }
+
+    .polaroid.pop {
+      animation: polaroidPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* 이미지 영역 */
+    .polaroid-img-area {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border-radius: 1px;
+      position: relative;
+    }
+
+    .polaroid-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 플레이스홀더 */
+    .polaroid-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .ph-emoji { font-size: 4rem; }
+
+    .ph-label {
+      font-family: 'YPairingFont', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 3px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    /* 카테고리별 그라데이션 */
+    .placeholder-fma      { background: linear-gradient(135deg, #FFEAA7, #FDCB6E, #E17055); }
+    .placeholder-aot      { background: linear-gradient(135deg, #55EFC4, #00B894, #2d3436); }
+    .placeholder-kimetsu  { background: linear-gradient(135deg, #FD79A8, #E84393, #6C5CE7); }
+    .placeholder-pokemon  { background: linear-gradient(135deg, #FFEAA7, #FFD700, #FF7675); }
+    .placeholder-sanrio   { background: linear-gradient(135deg, #FFB7D5, #FF85A1, #C084FC); }
+    .placeholder-default  { background: linear-gradient(135deg, #A29BFE, #6C5CE7, #74B9FF); }
+
+    /* 폴라로이드 하단 흰 여백 */
+    .polaroid-bottom {
+      position: absolute;
+      bottom: 0; left: 10px; right: 10px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .polaroid-q-num {
+      font-family: 'YPairingFont', sans-serif;
+      font-size: 0.82rem;
+      color: var(--color-text-light);
+      letter-spacing: 1px;
+    }
+
+    /* ── 질문 카드 ── */
+    .question-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      border: 1.5px solid var(--color-card-border);
+      padding: 16px 20px;
+      text-align: center;
+      margin-bottom: 10px;
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .question-text {
+      font-family: 'YPairingFont', sans-serif;
+      font-weight: bold;
+      font-size: 1.12rem;
+      line-height: 1.55;
+      color: var(--color-text);
+      word-break: keep-all;
+    }
+
+    /* ── 타이머 (common.css 오버라이드) ── */
+    .timer-wrap {
+      margin-bottom: 8px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    /* ── 피드백 ── */
+    .feedback {
+      text-align: center;
+      font-family: 'YPairingFont', sans-serif;
+      font-size: 0.95rem;
+      font-weight: bold;
+      min-height: 26px;
+      margin-bottom: 10px;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      display: inline-block;
+      align-self: center;
+      visibility: hidden;
+    }
+
+    .feedback.correct {
+      visibility: visible;
+      color: #2a7a2a;
+      background: rgba(200, 255, 200, 0.9);
+      border: 1.5px solid #3AAA3A;
+    }
+
+    .feedback.wrong {
+      visibility: visible;
+      color: #a01020;
+      background: rgba(255, 210, 210, 0.9);
+      border: 1.5px solid #D12E46;
+    }
+
+    /* 피드백 wrapper: 가운데 정렬용 */
+    .feedback-wrap {
+      display: flex;
+      justify-content: center;
+      min-height: 40px;
+      margin-bottom: 10px;
+    }
+
+    /* ── YES / NO 버튼 ── */
+    .action-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    #btnYes, #btnNo {
+      padding: 20px 12px;
+      font-size: 1.35rem;
+      letter-spacing: 3px;
+      font-family: 'YPairingFont', sans-serif;
+    }
+
+    /* ── 모바일 세로 화면 최적화 ── */
+    @media (max-height: 700px) {
+      .polaroid { padding-bottom: 38px; }
+      .polaroid-bottom { height: 38px; }
+      .question-card { padding: 12px 16px; min-height: 56px; }
+      .question-text { font-size: 1rem; }
+      #btnYes, #btnNo { padding: 15px 12px; font-size: 1.2rem; }
+      .progress-dots { margin-bottom: 8px; gap: 5px; }
+      .ph-emoji { font-size: 3rem; }
+    }
+    /* 문제 해설 기능 */
+    .explain-wrap {
+    display: none;
+    margin: 8px 0 12px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  #explainText {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    color: #333;
+    text-align: center;
+  }
+  #btnNext {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-radius: 10px;
+    background: #318fde;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  #btnNext:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }

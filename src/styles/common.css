@@ -1,0 +1,591 @@
+/* =====================================================
+   common.css — 덕력 감별소 공통 스타일
+   모든 페이지에서 반드시 import하여 사용할 것
+   ===================================================== */
+
+/* ── 0. 웹폰트 등록 ── */
+@font-face {
+  font-family: 'EF_jejudoldam';
+  src: url('fonts/EF_jejudoldam(TTF).ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MonaS12TextHK';
+  src: url('fonts/MonaS12TextHK.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Griun_PolFairness';
+  src: url('fonts/Griun_PolFairness-Rg.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OmyuPretty';
+  src: url('fonts/omyu_pretty.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MonaEmoji';
+  src: url('fonts/Mona12ColorEmoji.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MonaS12KR';
+  src: url('fonts/MonaS12TextKR.ttf') format('truetype');
+  font-display: swap;
+}
+
+/* ── 1. CSS 변수 (디자인 토큰) ── */
+:root {
+  /* 색상 */
+  --color-bg-start: #FFE8F4;
+  --color-bg-end: #EDE4FF;
+  --color-primary: #FF85A1;
+  --color-primary-dark: #E8608A;
+  --color-secondary: #C084FC;
+  --color-accent: #FFB7D5;
+  --color-text: #3D1A2E;
+  --color-text-light: #9B7090;
+  --color-card: #FFFFFF;
+  --color-card-border: rgba(255, 133, 161, 0.2);
+
+  /* 그림자 */
+  --shadow-card: 0 8px 32px rgba(255, 133, 161, 0.22);
+  --shadow-card-hover: 0 18px 48px rgba(255, 133, 161, 0.38);
+  --shadow-btn: 0 4px 16px rgba(255, 133, 161, 0.38);
+
+  /* 모서리 */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-full: 9999px;
+
+  /* 폰트 */
+  --font-ko: 'Griun_PolFairness', sans-serif;
+  --font-en: 'MonaS12KR', 'Nunito', sans-serif;
+
+  /* 트랜지션 (탄성 있는 bounce 커브) */
+  --transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+
+/* ── 2. 리셋 & 베이스 ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-ko);
+  color: var(--color-text);
+  background: linear-gradient(150deg, var(--color-bg-start) 0%, var(--color-bg-end) 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+
+/* ── 3. 배경 플로팅 애니메이션 ──
+   사용법: <div class="bg-floats" aria-hidden="true">
+             <span>☁️</span> × 11개
+           </div>
+*/
+.bg-floats {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-floats span {
+  position: absolute;
+  bottom: -60px;
+  animation: floatUp linear infinite;
+  opacity: 0;
+  user-select: none;
+  font-size: 1.6rem;
+}
+
+/* 각 요소 위치 / 크기 / 속도 / 딜레이 */
+.bg-floats span:nth-child(1) {
+  left: 4%;
+  font-size: 2rem;
+  animation-duration: 10s;
+  animation-delay: 0s;
+}
+
+.bg-floats span:nth-child(2) {
+  left: 12%;
+  font-size: 1.2rem;
+  animation-duration: 14s;
+  animation-delay: 3s;
+}
+
+.bg-floats span:nth-child(3) {
+  left: 22%;
+  font-size: 1.8rem;
+  animation-duration: 11s;
+  animation-delay: 1.5s;
+}
+
+.bg-floats span:nth-child(4) {
+  left: 33%;
+  font-size: 1rem;
+  animation-duration: 16s;
+  animation-delay: 4s;
+}
+
+.bg-floats span:nth-child(5) {
+  left: 44%;
+  font-size: 2.2rem;
+  animation-duration: 9s;
+  animation-delay: 0.5s;
+}
+
+.bg-floats span:nth-child(6) {
+  left: 55%;
+  font-size: 1.4rem;
+  animation-duration: 13s;
+  animation-delay: 2.5s;
+}
+
+.bg-floats span:nth-child(7) {
+  left: 65%;
+  font-size: 1rem;
+  animation-duration: 15s;
+  animation-delay: 5s;
+}
+
+.bg-floats span:nth-child(8) {
+  left: 74%;
+  font-size: 1.6rem;
+  animation-duration: 12s;
+  animation-delay: 1s;
+}
+
+.bg-floats span:nth-child(9) {
+  left: 83%;
+  font-size: 2rem;
+  animation-duration: 10s;
+  animation-delay: 3.5s;
+}
+
+.bg-floats span:nth-child(10) {
+  left: 90%;
+  font-size: 1.2rem;
+  animation-duration: 14s;
+  animation-delay: 6s;
+}
+
+.bg-floats span:nth-child(11) {
+  left: 96%;
+  font-size: 1.8rem;
+  animation-duration: 11s;
+  animation-delay: 2s;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 0.65;
+  }
+
+  95% {
+    opacity: 0.65;
+  }
+
+  100% {
+    transform: translateY(-110vh) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+
+/* ── 4. 레이아웃 컨테이너 ── */
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+
+/* ── 5. 카드 컴포넌트 ──
+   사용법: <div class="card"> ... </div>
+*/
+.card {
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  border: 1.5px solid var(--color-card-border);
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+
+/* ── 6. 버튼 컴포넌트 ──
+   사용법:
+     <button class="btn btn-normal">노말</button>
+     <button class="btn btn-hard">하드</button>
+     <button class="btn btn-primary">확인</button>
+*/
+.btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 16px 20px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: 'OmyuPretty', var(--font-ko);
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-btn);
+  line-height: 1;
+}
+
+.btn span {
+  font-size: 1.05rem;
+  font-weight: bold;
+}
+
+.btn small {
+  font-size: 0.72rem;
+  opacity: 0.85;
+  font-family: var(--font-en);
+}
+
+.btn-normal {
+  background: linear-gradient(135deg, #A8DFFF, #60B8FF);
+  color: #1a4a6e;
+}
+
+.btn-hard {
+  background: linear-gradient(135deg, #FFB7D5, #FF85A1);
+  color: #6e1a35;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #FF85A1, #C084FC);
+  color: white;
+  width: 100%;
+  padding: 18px;
+  font-size: 1.1rem;
+}
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.04);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.btn:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none;
+}
+
+
+/* ── 7. 모달 컴포넌트 ──
+   사용법:
+     <div class="modal-overlay" id="modalOverlay">
+       <div class="modal-card"> ... </div>
+     </div>
+   JS: modalOverlay.classList.add('active') / .remove('active')
+*/
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(61, 26, 46, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 36px 28px 28px;
+  width: 100%;
+  max-width: 340px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 24px 64px rgba(255, 133, 161, 0.35);
+  transform: scale(0.85) translateY(24px);
+  transition: var(--transition);
+}
+
+.modal-overlay.active .modal-card {
+  transform: scale(1) translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #FFE8F4;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover {
+  background: var(--color-accent);
+}
+
+.modal-emoji {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+}
+
+.modal-title {
+  font-size: 1.55rem;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+.modal-subtitle {
+  font-size: 0.88rem;
+  color: var(--color-text-light);
+  margin-bottom: 22px;
+  font-family: var(--font-en);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+}
+
+
+/* ── 8. 덕력 게이지 컴포넌트 ──
+   사용법: <div class="card gauge-wrap"> ... </div>
+   JS로 .gauge-fill의 width(%)와 텍스트만 업데이트
+*/
+.gauge-wrap {
+  padding: 20px 22px;
+}
+
+.gauge-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.gauge-label {
+  font-size: 0.88rem;
+  color: var(--color-text-light);
+}
+
+.gauge-score {
+  font-size: 0.88rem;
+  color: var(--color-text-light);
+}
+
+.gauge-score strong {
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  font-family: var(--font-en);
+}
+
+.gauge-track {
+  background: #FFE8F4;
+  border-radius: var(--radius-full);
+  height: 18px;
+  overflow: visible;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.gauge-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, #FFB7D5 0%, #FF85A1 60%, #C084FC 100%);
+  transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  min-width: 18px;
+}
+
+/* 게이지 끝 동그란 포인터 */
+.gauge-fill::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background: white;
+  border: 3px solid #FF85A1;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(255, 133, 161, 0.55);
+}
+
+.gauge-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.gauge-grade-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #FF85A1, #C084FC);
+  color: white;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+}
+
+
+/* ── 9. 완료 뱃지 ──
+   완료 시 JS로 .done 클래스 추가
+*/
+.mode-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-family: 'OmyuPretty', sans-serif;
+  font-weight: normal;
+  letter-spacing: 0.3px;
+  line-height: 1;
+}
+
+.mode-badge.done {
+  background: #E6FFE6;
+  color: #3AAA3A;
+}
+
+.mode-badge.done::before {
+  content: '✓ ';
+}
+
+
+/* ── 10. 타이머 바 ──
+   quiz.html에서 사용
+   JS로 .timer-fill의 width(%)를 줄여나가면 됨
+*/
+.timer-wrap {
+  height: 6px;
+  background: #FFE8F4;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.timer-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, #FF85A1, #C084FC);
+  transition: width 1s linear;
+}
+
+.timer-fill.urgent {
+  background: linear-gradient(90deg, #FF4444, #FF85A1);
+  animation: pulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.6;
+  }
+}
+
+
+/* ── 11. 유틸리티 ── */
+.z-content {
+  position: relative;
+  z-index: 1;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-sm {
+  margin-top: 12px;
+}
+
+.mt-md {
+  margin-top: 20px;
+}
+
+.mt-lg {
+  margin-top: 32px;
+}
+
+.mb-sm {
+  margin-bottom: 12px;
+}
+
+.mb-md {
+  margin-bottom: 20px;
+}
+
+
+/* ── 12. 반응형 (모바일 퍼스트) ── */
+@media (min-width: 480px) {
+  .container {
+    padding: 0 28px;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 1.05rem;
+  }
+}

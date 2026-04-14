@@ -1,0 +1,857 @@
+body {
+  background: #EFF8FF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 80px;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ── 배경 비주얼 (Background Visuals) ── */
+.bg-visuals {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bg-blob {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.05) 70%, transparent 100%);
+  filter: blur(80px);
+  border-radius: 50%;
+  animation: blobMove 20s infinite alternate ease-in-out;
+}
+
+.bg-blob.secondary {
+  width: 400px; height: 400px;
+  right: -100px; bottom: -100px;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%);
+  animation-delay: -5s;
+}
+
+@keyframes blobMove {
+  from { transform: translate(-10%, -10%) scale(1); }
+  to { transform: translate(10%, 10%) scale(1.2); }
+}
+
+/* Floating Items */
+.floating-item {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.15;
+  user-select: none;
+  animation: floatItem var(--duration) infinite ease-in-out;
+  filter: grayscale(0.5);
+}
+
+@keyframes floatItem {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-100px) rotate(20deg); }
+}
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background-color: #f2d74e;
+  z-index: 10001;
+  top: -10px;
+  animation: confettiFall var(--duration) linear forwards;
+}
+
+@keyframes confettiFall {
+  from { transform: translateY(0) rotate(0deg); opacity: 1; }
+  to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+.result-container {
+  margin-top: 30px;
+  animation: fadeInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 결과 카드 (Glassmorphism) */
+.result-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 30px 24px;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+}
+
+.grade-badge-wrap {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+/* 등급별 뱃지 스타일 */
+.gauge-grade-badge {
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: var(--transition);
+}
+
+.grade-S { background: linear-gradient(135deg, #FFD700, #FFA500); box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); animation: shine 2s infinite; }
+.grade-A { background: linear-gradient(135deg, #FF6B6B, #EE5253); }
+.grade-B { background: linear-gradient(135deg, #48DBFB, #2E86DE); }
+.grade-C { background: linear-gradient(135deg, #1DD1A1, #10AC84); }
+.grade-D { background: linear-gradient(135deg, #A4B0BE, #747D8C); }
+
+@keyframes shine {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.2) drop-shadow(0 0 10px gold); }
+  100% { filter: brightness(1); }
+}
+
+.grade-title {
+  font-family: 'EF_jejudoldam', var(--font-ko);
+  font-size: 2.1rem;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+  letter-spacing: -1px;
+  word-break: keep-all;
+}
+
+.grade-description {
+  font-size: 1rem;
+  color: var(--color-text-light);
+  line-height: 1.5;
+  margin-bottom: 20px;
+  padding: 0 10px;
+  word-break: keep-all;
+  font-weight: 700;
+}
+
+.grade-quote {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: #7C3AED;
+  background: #F5F3FF;
+  padding: 12px 15px;
+  border-radius: 12px;
+  margin-bottom: 28px;
+  border-left: 4px solid #8B5CF6;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+.result-image-area {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 250px;
+  margin: 0 auto 24px;
+  background: white;
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 3px solid white;
+}
+
+.result-image-area img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.score-display-wrap {
+  background: #F8FAFC;
+  border-radius: 20px;
+  padding: 24px;
+  border: 2px dashed #E2E8F0;
+  margin-bottom: 15px;
+}
+
+.score-label {
+  font-size: 0.75rem;
+  color: #94A3B8;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  display: block;
+  text-transform: uppercase;
+}
+
+.score-text-big {
+  font-size: 3.5rem;
+  font-weight: 950;
+  font-family: var(--font-en);
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.score-text-total {
+  font-size: 1.2rem;
+  color: #CBD5E1;
+  font-weight: 700;
+  margin-left: 2px;
+}
+
+/* 공유 섹션 */
+.share-container {
+  background: white;
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+  width: 100%;
+}
+
+.share-label {
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #94A3B8;
+  margin-bottom: 16px;
+  display: block;
+  text-align: center;
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.s-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  padding: 0;
+}
+
+.s-btn img {
+  width: 60%; height: 60%;
+  object-fit: contain;
+}
+
+.s-btn.kakao     { background: #FEE500; }
+.s-btn.instagram { background: #E4405F; } /* 인스타 브랜드 컬러로 고정 */
+.s-btn.x         { background: #000; } 
+.s-btn.url       { background: #F1F5F9; color: #64748B; font-size: 1.2rem; }
+
+/* 추천 섹션 스타일 (통합을 위해 기존 스타일 삭제 후 버튼 스타일링 강화) */
+.random-section {
+  margin-top: 30px;
+  width: 100%;
+}
+
+/* ── 이미지 저장용 오타쿠 등록증 (License Card) ── */
+#export-area {
+  position: absolute;
+  top: -9999px; left: -9999px;
+  padding: 40px;
+  box-sizing: border-box;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.otaku-license {
+  width: 700px;
+  height: 420px;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  border: 8px solid #fff;
+  font-family: 'Nunito', var(--font-ko);
+}
+
+/* 배경 테마 (Category Specific) */
+.otaku-license::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 100px;
+  background: linear-gradient(90deg, #6366F1, #A855F7);
+  z-index: 1;
+}
+
+/* ── 테마별 세부 스타일 정의 (Theme Specifics) ── */
+
+/* [1] 산리오 테마 - My Sweet Diary (Open Diary Edition) */
+.otaku-license.theme-sanrio {
+  background: #FFF0F5;
+  background-image: linear-gradient(90deg, #FAD0C4 0%, #FFD1FF 100%);
+  border: 12px solid #FFB6C1;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(255,105,180,0.4);
+  padding: 0;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 다이어리 속지 (Paper Pages) - Grid Layout으로 완벽 분할 */
+.otaku-license.theme-sanrio .license-body {
+  width: 95%;
+  height: 90%;
+  margin: auto;
+  background: #FFF;
+  background-image: 
+    linear-gradient(90deg, rgba(255,182,193,0.15) 1px, transparent 1px),
+    linear-gradient(rgba(255,182,193,0.15) 1px, transparent 1px);
+  background-size: 20px 20px;
+  border-radius: 10px;
+  /* 3컬러 그리드: [왼쪽 페이지] [제본 공간] [오른쪽 페이지] */
+  display: grid;
+  grid-template-columns: 180px 60px 1fr;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  position: relative;
+  padding: 20px 30px;
+  overflow: visible;
+}
+
+/* 다이어리 가운데 링 제본 (Spine) */
+.otaku-license.theme-sanrio .license-body::before {
+  content: "";
+  grid-column: 2; /* 두 번째 그리드 칸(가운데)에 고정 */
+  width: 32px;
+  height: calc(100% + 40px);
+  margin-top: -20px;
+  background: linear-gradient(90deg, #E0E0E0, #F5F5F5, #D0D0D0);
+  border-left: 1px solid rgba(0,0,0,0.05);
+  border-right: 1px solid rgba(0,0,0,0.05);
+  z-index: 10;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+  justify-self: center;
+}
+
+/* 실제 링 구멍 효과 (Ring Holes) - 반복적인 라디얼 그라데이션으로 구현 */
+.otaku-license.theme-sanrio .license-body::after {
+  content: "";
+  grid-column: 2;
+  width: 100%;
+  height: 80%;
+  justify-self: center;
+  z-index: 11;
+  background-image: radial-gradient(circle, #888 6px, transparent 7px);
+  background-size: 100% 20%; /* 5개의 링이 세로로 배치되도록 (100/5 = 20) */
+  background-repeat: no-repeat;
+  /* 5개의 위치를 명시적으로 지정하여 세로 정렬 보장 */
+  background: 
+    radial-gradient(circle, #555 6px, transparent 7px) no-repeat center 10%,
+    radial-gradient(circle, #555 6px, transparent 7px) no-repeat center 30%,
+    radial-gradient(circle, #555 6px, transparent 7px) no-repeat center 50%,
+    radial-gradient(circle, #555 6px, transparent 7px) no-repeat center 70%,
+    radial-gradient(circle, #555 6px, transparent 7px) no-repeat center 90%;
+  pointer-events: none;
+}
+
+.otaku-license.theme-sanrio .license-header {
+  position: absolute;
+  top: 15px; width: 100%; text-align: center;
+  z-index: 20;
+}
+.otaku-license.theme-sanrio .license-header h1 { 
+  color: #D6336C; font-family: 'Gamja Flower'; font-size: 1.8rem;
+  background: white; padding: 2px 20px; border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(255,182,193,0.3);
+}
+.otaku-license.theme-sanrio .license-header .logo-text { display: none; }
+
+.otaku-license.theme-sanrio .license-photo { 
+  grid-column: 1; /* 첫 번째 그리드 칸 */
+  width: 150px; height: 190px;
+  border: 5px solid white; background: white;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+  transform: rotate(-3deg);
+  position: relative;
+  z-index: 5;
+  margin-left: 10px;
+}
+/* 마스킹 테이프 */
+.otaku-license.theme-sanrio .license-photo::after {
+  content: "";
+  position: absolute; top: -15px; left: 50%; transform: translateX(-50%) rotate(2deg);
+  width: 80px; height: 30px;
+  background: rgba(255, 182, 193, 0.6);
+  backdrop-filter: blur(1px);
+  z-index: 6;
+}
+
+.otaku-license.theme-sanrio .license-info { 
+  grid-column: 3; /* 세 번째 그리드 칸 */
+  display: flex; flex-direction: column;
+  gap: 10px; padding-left: 20px;
+  z-index: 5;
+}
+
+.otaku-license.theme-sanrio .info-row { border: none; margin-bottom: 2px; }
+.otaku-license.theme-sanrio .info-label { 
+  color: #D6336C; font-family: 'Gamja Flower'; font-size: 0.9rem; 
+  opacity: 0.6; margin-bottom: -5px;
+}
+.otaku-license.theme-sanrio .info-value { 
+  font-family: 'Gamja Flower'; color: #444; font-size: 1.3rem;
+  border-bottom: 2px solid #FFE4E1; display: block;
+}
+
+.otaku-license.theme-sanrio .certified-stamp { 
+  background: none; border: 3px double #FF69B4; color: #FF69B4; 
+  font-family: 'Gamja Flower'; font-size: 1rem;
+  right: 40px; bottom: 30px; transform: rotate(-5deg);
+  z-index: 20;
+}
+.otaku-license.theme-sanrio .license-footer { display: none; }
+
+/* [2] 포켓몬 테마 - Pokedex Edition (Ultra Fidelity) */
+.otaku-license.theme-pokemon {
+  background: #B01111; /* 기기 본체 색상 */
+  border: 10px solid #800000;
+  box-shadow: 
+    inset 4px 4px 0px rgba(255,255,255,0.2), 
+    inset -4px -4px 0px rgba(0,0,0,0.3),
+    0 10px 20px rgba(0,0,0,0.4);
+  overflow: hidden;
+  position: relative;
+  border-radius: 20px 20px 50px 20px; /* 비대칭 디자인 */
+}
+/* 포켓도감 특유의 힌지 및 대형 렌즈 */
+.otaku-license.theme-pokemon::before {
+  content: "";
+  position: absolute;
+  top: 10px; left: 10px; width: 50px; height: 50px;
+  background: radial-gradient(circle, #87CEEB, #2196F3, #0D47A1);
+  border: 4px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 15px #2196F3;
+  z-index: 10;
+}
+/* LCD 스크린 영역 */
+.otaku-license.theme-pokemon .license-body { 
+  background: #9DB48C; /* Game Boy LCD 색상 */
+  margin: 70px 15px 80px 15px; 
+  border-radius: 10px;
+  border: 6px solid #333;
+  padding: 15px;
+  box-shadow: inset 4px 4px 10px rgba(0,0,0,0.5);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.6rem; 
+  line-height: 1.5;
+}
+.otaku-license.theme-pokemon .license-header { display: none; } /* 상단 헤더 숨김 */
+.otaku-license.theme-pokemon .license-photo { 
+  border: 3px solid #333; 
+  padding: 0;
+  background: #000;
+}
+.otaku-license.theme-pokemon .license-photo::after {
+  content: ""; position: absolute; top:0; left:0; width:100%; height:100%;
+  background: repeating-linear-gradient(rgba(0,0,0,0.1) 0px, transparent 2px);
+  pointer-events: none;
+}
+/* 하단 조작 버튼 (십자키 등) */
+.otaku-license.theme-pokemon::after {
+  content: "✚  ●  ○";
+  position: absolute;
+  bottom: 20px; left: 0; width: 100%;
+  color: #800000; font-size: 2rem; text-align: center;
+  font-family: serif; letter-spacing: 20px;
+}
+.otaku-license.theme-pokemon .info-label { color: #333; opacity: 0.7; font-weight: 800; font-size: 0.5rem; }
+.otaku-license.theme-pokemon .info-value { color: #1E1E1E; font-size: 0.65rem; }
+.otaku-license.theme-pokemon .certified-stamp { 
+  top: 20px; right: 20px; background: #FF1F1F; color: #fff; border: 2px solid #fff;
+}
+
+/* [3] 진격의 거인 테마 - Regiment Passport (Ultra Fidelity) */
+.otaku-license.theme-aot {
+  background: #EEDDBB;
+  background-image: 
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.65" stallAmount="2" numOctaves="3" result="t"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100" height="100" filter="url(#n)" opacity="0.1"/></svg>'),
+    radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.05) 100%);
+  border: none;
+  clip-path: polygon(
+    2% 1%, 98% 2%, 99% 97%, 95% 99%, 5% 98%, 1% 95%, 2% 50%
+  ); /* 찢어진 종이 효과 */
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+  padding: 30px;
+}
+.otaku-license.theme-aot::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/e/e0/Wings_of_Freedom_emblem.svg') no-repeat center;
+  background-size: 80%;
+  opacity: 0.03; /* 거대한 저채도 워터마크 */
+  pointer-events: none;
+}
+.otaku-license.theme-aot .license-header h1 { 
+  color: #2C1E16; font-family: 'Griun_PolFairness'; font-size: 2rem; border-bottom: 2px solid #2C1E16;
+}
+.otaku-license.theme-aot .license-photo { 
+  border: none; background: #EEE; padding: 10px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  transform: rotate(-2deg);
+  position: relative;
+}
+/* 사진 고정용 철심(스테이플러) */
+.otaku-license.theme-aot .license-photo::before {
+  content: ""; position: absolute; top: 15px; left: 5px; width: 20px; height: 5px;
+  background: #999; box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+.otaku-license.theme-aot .license-info { background: transparent; }
+.otaku-license.theme-aot .info-label { color: #5D4037; font-weight: 900; }
+.otaku-license.theme-aot .certified-stamp { 
+  right: 40px; bottom: 40px; border-width: 3px; transform: rotate(15deg);
+}
+/* 단장 엘빈 스미스 서명 */
+.otaku-license.theme-aot .license-footer::after {
+  content: "Erwin Smith";
+  display: block; font-family: 'Dancing Script', cursive; font-size: 1.5rem;
+  color: #2C1E16; opacity: 0.6; text-align: right; margin-top: 10px;
+}
+
+/* [4] 귀멸의 칼날 테마 - Slayer Corps ID (Ultra Fidelity) */
+.otaku-license.theme-kimetsu {
+  background: #332B3A; /* 어두운 목재/대원복 색상 */
+  background-image: repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(0,0,0,0.1) 40px, rgba(0,0,0,0.1) 41px);
+  border: 12px solid #1A1A1A;
+  border-image: linear-gradient(to bottom, #4B3621, #2C1E16) 30;
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.5), 0 15px 30px rgba(0,0,0,0.6);
+  position: relative;
+}
+/* 흘러내리는 등꽃 아이콘 */
+.otaku-license.theme-kimetsu::before {
+  content: "🌸 🌸 🌸";
+  position: absolute;
+  top: 10px; width: 100%; text-align: center;
+  color: #BD93F9; font-size: 1.5rem; opacity: 0.4;
+  filter: blur(1px);
+  background: none; /* 오버라이드 */
+}
+.otaku-license.theme-kimetsu .license-body { background: transparent; }
+.otaku-license.theme-kimetsu .license-header h1 { 
+  font-family: 'EF_jejudoldam'; color: #BD93F9; letter-spacing: 4px;
+}
+.otaku-license.theme-kimetsu .license-photo { 
+  border: 2px solid #BD93F9; padding: 5px; background: #282A36;
+}
+.otaku-license.theme-kimetsu .info-label { color: #BD93F9; font-weight: 800; text-transform: uppercase; }
+.otaku-license.theme-kimetsu .info-value { color: #F8F8F2; text-shadow: 0 0 5px #BD93F9; }
+.otaku-license.theme-kimetsu .certified-stamp { 
+  border-color: #FF5555; color: #FF5555; background: rgba(255, 85, 85, 0.1);
+}
+
+/* [5] 강철의 연금술사 테마 - State Alchemist Badge (Ultra Fidelity) */
+.otaku-license.theme-fma {
+  background: #C0C0C0; /* 실버 */
+  background-image: 
+    linear-gradient(135deg, #E5E4E2 25%, transparent 25%), 
+    linear-gradient(225deg, #E5E4E2 25%, transparent 25%);
+  background-size: 40px 40px;
+  border: 10px solid #708090;
+  border-radius: 50% 50% 10% 10% / 10% 10% 10% 10%; /* 은시계 상단 형태 */
+  box-shadow: 
+    inset 2px 2px 0px #FFF, 
+    inset -5px -5px 15px rgba(0,0,0,0.3),
+    0 20px 40px rgba(0,0,0,0.5);
+  position: relative;
+}
+/* 기계 기어 및 체인 고리 */
+.otaku-license.theme-fma::before {
+  content: "⚙️";
+  position: absolute;
+  top: -20px; left: calc(50% - 25px);
+  width: 50px; height: 50px;
+  font-size: 3rem; color: #708090;
+  background: none; z-index: 10;
+}
+.otaku-license.theme-fma .license-header h1 { 
+  font-family: 'MonaS12KR'; font-weight: 950; color: #2F4F4F;
+}
+.otaku-license.theme-fma .license-photo { 
+  border: 4px double #2F4F4F; padding: 0;
+  background: radial-gradient(circle, #EEE, #CCC);
+}
+.otaku-license.theme-fma .info-label { color: #2F4F4F; opacity: 0.8; font-weight: 950; }
+.otaku-license.theme-fma .info-value { font-family: 'MonaS12KR'; color: #1E1E1E; border-bottom: 1px dashed #2F4F4F; }
+.otaku-license.theme-fma .certified-stamp { 
+  border-color: #333; color: #333; border-radius: 50%; width: 60px; height: 60px;
+}
+
+.license-header {
+  position: relative;
+  z-index: 2;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  color: white;
+}
+
+.license-header h1 {
+  font-size: 1.8rem;
+  font-family: 'EF_jejudoldam';
+  letter-spacing: 2px;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.license-header .logo-text { font-weight: 900; opacity: 0.8; font-size: 0.9rem; }
+
+.license-body {
+  flex: 1;
+  display: flex;
+  padding: 30px 40px;
+  z-index: 2;
+  background: white;
+  gap: 30px;
+}
+
+.license-photo {
+  width: 180px;
+  height: 220px;
+  background: #f8fafc;
+  border: 3px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
+}
+
+.license-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.license-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px; /* 간격 소폭 조정하여 항목 추가 수용 */
+}
+
+.info-row { display: flex; flex-direction: column; gap: 4px; }
+.info-label { font-size: 0.7rem; font-weight: 800; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px; }
+.info-value { font-size: 1.4rem; font-weight: 950; color: #1E293B; word-break: keep-all; }
+.info-value.rank { font-family: 'EF_jejudoldam'; color: #6366F1; font-size: 1.8rem; }
+.info-value.tiny { font-size: 0.95rem; color: #64748B; font-weight: 700; opacity: 0.8; }
+
+.license-footer {
+  height: 60px;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #64748B;
+  border-top: 1px solid #e2e8f0;
+}
+
+.certified-stamp {
+  position: absolute;
+  right: 40px;
+  bottom: 80px;
+  width: 100px;
+  height: 100px;
+  border: 4px solid rgba(220, 38, 38, 0.6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(220, 38, 38, 0.6);
+  font-family: 'EF_jejudoldam';
+  font-size: 1.2rem;
+  transform: rotate(-15deg);
+  pointer-events: none;
+  user-select: none;
+}
+.certified-stamp::after {
+  content: 'OFFICIAL';
+  position: absolute;
+  font-size: 0.6rem;
+  top: 15px;
+}
+
+/* QR Code for License */
+.license-qr-wrap {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  background: white;
+  padding: 4px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  z-index: 11;
+}
+.license-qr-wrap #qrcode {
+  width: 50px;
+  height: 50px;
+}
+.license-qr-wrap span {
+  font-size: 8px;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: -0.5px;
+}
+
+.btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.btn-secondary { background: #F1F5F9; color: #64748B; border: 1px solid #E2E8F0; }
+
+/* 랜덤 액션 버튼 */
+.random-section { width: 100%; margin-top: 24px; padding: 0 10px; }
+.btn-random-big {
+  width: 100%;
+  padding: 24px;
+  background: linear-gradient(135deg, #6366F1 0%, #A855F7 100%);
+  color: white;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 30px rgba(99, 102, 241, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.btn-random-big:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(99, 102, 241, 0.4); }
+.btn-random-big span { font-size: 1.2rem; font-weight: 800; margin-bottom: 4px; }
+.btn-random-big small { font-size: 0.8rem; opacity: 0.8; font-weight: 600; }
+
+/* ── 증명서 모달 (Certificate Modal) ── */
+#certModal {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+  animation: modalFadeIn 0.4s ease;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(1.1); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-content {
+  max-width: 90%;
+  max-height: 80%;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.modal-content img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.modal-hint {
+  color: white;
+  text-align: center;
+  margin-bottom: 24px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.modal-hint p { margin: 4px 0; font-weight: 700; }
+.modal-hint .primary { font-size: 1.1rem; color: #6EE7B7; }
+.modal-hint .secondary { font-size: 0.85rem; opacity: 0.7; }
+
+.btn-close-modal {
+  background: white;
+  color: #1E293B;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-weight: 950;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-close-modal:hover { transform: scale(1.05); background: #F8FAFC; }
+
+/* ── 랭킹 게이지 (Ranking Gauge) ── */
+.ranking-section {
+  width: 100%;
+  margin-top: 10px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+
+.ranking-label {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #475569;
+  margin-bottom: 12px;
+}
+
+.ranking-label span {
+  font-size: 1.4rem;
+  color: #6366F1;
+  font-family: 'EF_jejudoldam';
+}
+
+.gauge-container {
+  width: 100%;
+  height: 12px;
+  background: #E2E8F0;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.gauge-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #6366F1 0%, #A855F7 100%);
+  border-radius: 10px;
+  transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.gauge-hint {
+  font-size: 0.75rem;
+  color: #94A3B8;
+  margin-top: 8px;
+  font-weight: 600;
+}
