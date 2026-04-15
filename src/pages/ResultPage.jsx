@@ -10,6 +10,13 @@ import {
 import { saveQuizResult } from '../modules/storage-module';
 import "../styles/result.css"
 
+// sns 공유 버튼
+const SNS_LIST = [
+  { id: 'kakao', imgName: 'kakao.png' },
+  { id: 'instagram', imgName: 'insta.png' },
+  { id: 'x', imgName: 'x-twitter.png' },
+];
+
 /* ── 부유 이모지 ── */
 const EMOJI_MAP = {
   pokemon: ['⚽','⚡','🔥','💧','🍃'],
@@ -171,6 +178,11 @@ export default function ResultPage() {
       <div className="share-container mt-md">
         <span className="share-label">Share with Friends</span>
         <div className="share-buttons">
+          {SNS_LIST.map((sns) => (
+            <button key={sns.id} className='s-btn'>
+              <img src={`/assets/sns-ci/${sns.imgName}`} alt={sns.id} />
+            </button>
+          ))}
           <button className="s-btn url" onClick={() => {
             navigator.clipboard.writeText(window.location.href)
               .then(() => alert('링크가 복사됐어요!'));
@@ -178,7 +190,7 @@ export default function ResultPage() {
             <span>🔗</span>
           </button>
         </div>
-      </div>
+      
 
       {/* 다른 퀴즈 도전 */}
       <div className="random-section">
@@ -203,6 +215,7 @@ export default function ResultPage() {
           👈 메인으로 돌아가기
         </a>
       </div>
+    </div>
     </div>
   );
 }
