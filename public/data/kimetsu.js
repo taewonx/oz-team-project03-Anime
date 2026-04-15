@@ -9,7 +9,7 @@
  * - hard는 normal보다 훨씬 어렵게 (호흡 기술명, 세부 설정 등)
  */
 
-const QUIZ_DATA_KIMETSU = [
+window.QUIZ_DATA_KIMETSU = [
   { q: "탄지로의 여동생 이름은 네즈코다.",     a: true,  img: "assets/quiz/kimetsu-img/kimetsu-image1.png", explanation: "탄지로의 여동생은 네즈코입니다." },
   { q: "젠이츠가 사용하는 호흡은 물의 호흡이다.", a: false, img: "assets/quiz/kimetsu-img/kimetsu-image2.png", explanation: "젠이츠는 번개 호흡을 사용합니다." },
   { q: "네즈코는 오빠를 지키기 위해 대나무를 입에 물고 있다.", a: true, img: "assets/quiz/kimetsu-img/kimetsu-image3.png", explanation: "네즈코는 이빨이 드러나는 것을 막기 위해 대나무를 물고 다닙니다." },

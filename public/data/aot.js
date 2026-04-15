@@ -7,7 +7,7 @@
  * - a: true, img: "assets/quiz/aot-img/aot-" = YES(정답), false, img: "assets/quiz/aot-img/aot-" = NO(정답)
  */
 
-const QUIZ_DATA_AOT = [
+window.QUIZ_DATA_AOT = [
   { q: "에렌 예거의 고향은 '시간시나 구'이다.", a: true, img: "assets/quiz/aot-img/", explanation: "월 마리아 남쪽 끝에 위치한 시간시나 구가 에렌의 고향이 맞습니다." },
   { q: "거인의 유일한 약점은 심장이다.", a: false, img: "assets/quiz/aot-img/", explanation: "거인은 심장이 아니라 목 뒤의 '뒷덜미'를 베어야만 죽습니다." },
   { q: "리바이 병장은 결벽증이 있어 청소에 집착한다.", a: true, img: "assets/quiz/aot-img/", explanation: "리바이는 전투 중에도 피가 튀는 것을 싫어하며 청결에 매우 민감합니다." },

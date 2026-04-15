@@ -9,7 +9,7 @@
  * - hard는 normal보다 훨씬 어렵게 (도감번호, 진화조건, 기술 등)
  */
 
-const QUIZ_DATA_POKEMON = [
+window.QUIZ_DATA_POKEMON = [
   { q: "피카츄는 전기 타입이다.", a: true, img: "assets/quiz/pokemon-img/", explanation: "피카츄는 전기 타입 포켓몬입니다." },
   { q: "파이리의 첫 번째 진화는 리자몽이다.", a: false, img: "assets/quiz/pokemon-img/", explanation: "파이리는 리자드->리자몽 순으로 진화합니다." },
   { q: "피카츄의 진화 전 형태는 피츄이다.", a: true, img: "assets/quiz/pokemon-img/", explanation: "피카츄의 베이비형은 피츄입니다." },

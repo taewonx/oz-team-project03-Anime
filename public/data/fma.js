@@ -9,7 +9,7 @@
  * - hard는 normal보다 훨씬 어렵게 (등가교환 법칙, 세부 설정 등)
  */
 
-const QUIZ_DATA_FMA = [
+window.QUIZ_DATA_FMA = [
   { q: "에드워드 엘릭의 오른팔은 자동인형이다.", a: true,  img: "assets/quiz/fma-img/", explanation: "에드워드의 오른팔은 오토메일(자동인형)입니다." },
   { q: "알폰스 엘릭은 형이다.",                  a: false, img: "assets/quiz/fma-img/", explanation: "알폰스는 동생이고, 에드워드가 형입니다." },
   { q: "연금술의 기본 원칙은 '등가교환'이다.",  a: true,  img: "assets/quiz/fma-img/", explanation: "동등 교환은 FMA 세계관의 핵심 원칙입니다." },

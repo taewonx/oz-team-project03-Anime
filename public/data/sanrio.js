@@ -9,7 +9,7 @@
  * - hard는 normal보다 훨씬 어렵게 (생일, 세부 설정 등)
  */
 
-const QUIZ_DATA_SANRIO = [
+window.QUIZ_DATA_SANRIO = [
   { q: "쿠로미의 리본 색은 검정색이다.", a: true,  img: "assets/quiz/sanrio-img/", explanation: "쿠로미의 리본은 검은색입니다." },
   { q: "시나모롤은 강아지 캐릭터다.",    a: false, img: "assets/quiz/sanrio-img/", explanation: "시나모롤은 개 캐릭터입니다. '강아지'라는 표현은 어감 차이지만 틀렸다는 설정입니다." },
   { q: "헬로키티는 고양이 캐릭터이다.", a: true,  img: "assets/quiz/sanrio-img/", explanation: "헬로키티는 고양이 모티브 캐릭터입니다." },
