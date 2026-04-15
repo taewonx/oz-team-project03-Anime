@@ -16,11 +16,11 @@
       to   { transform: translate(-50%, -50%) rotate(360deg); }
     }
 
-    body {
+    body.quiz {
       background: transparent; /* spinRays가 보이도록 */
     }
 
-    body::before {
+    body.quiz::before {
       content: '';
       position: fixed;
       top: 50%; left: 50%;

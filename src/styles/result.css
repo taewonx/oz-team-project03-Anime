@@ -1,4 +1,4 @@
-body {
+body.result {
   background: #EFF8FF;
   display: flex;
   flex-direction: column;

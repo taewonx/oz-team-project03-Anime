@@ -1,4 +1,4 @@
-@font-face {
+﻿@font-face {
       font-family: 'YPairingFont';
       src: url('fonts/YPairingFont-Regular.ttf') format('truetype');
       font-weight: normal;
@@ -13,7 +13,7 @@
        ══════════════════════════════════════ */
 
     /* ── 배경 오버라이드: 흰색 베이스 ── */
-    body {
+    body.home {
       background: #EFF8FF;
     }
 

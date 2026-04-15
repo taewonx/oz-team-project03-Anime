@@ -25,6 +25,13 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
+  useEffect(() => {
+    document.body.classList.add("home");
+    return () => {
+      document.body.classList.remove("home");
+    };
+  }, []);
+
   // 페이지 로드 시 점수 업데이트
   useEffect(() => {
     const score = getTotalScore();

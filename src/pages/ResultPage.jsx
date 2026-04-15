@@ -54,6 +54,13 @@ export default function ResultPage() {
   const catTitle   = getCategoryTitle(category);
   const percentile = calculatePercentile(scorePct);
 
+  useEffect(() => {
+    document.body.classList.add("result");
+    return () => {
+      document.body.classList.remove("result");
+    };
+  }, []);
+
   // 저장
   useEffect(() => {
     saveQuizResult({ category, mode, score, maxScore: displayMax, grade: gradeInfo.title });

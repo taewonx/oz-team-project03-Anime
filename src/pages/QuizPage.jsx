@@ -32,6 +32,13 @@ export default function QuizPage() {
   const category = (searchParams.get('category') || 'aot').toLowerCase();
   const meta = CATEGORY_META[category] || { emoji: '✨', label: 'QUIZ', cls: 'placeholder-default' };
 
+  useEffect(() => {
+    document.body.classList.add("quiz");
+    return () => {
+      document.body.classList.remove("quiz");
+    };
+  }, []);
+
   /* ── State ── */
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
